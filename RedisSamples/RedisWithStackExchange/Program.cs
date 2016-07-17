@@ -12,7 +12,7 @@ namespace RedisWithStackExchange
     {
         static void Main(string[] args)
         {
-            ConnectionMultiplexer connection = ConnectionMultiplexer.Connect( "localhost,ssl=false,password=foobared");
+            ConnectionMultiplexer connection = ConnectionMultiplexer.Connect( "localhost,ssl=false");
             //var options = new ConfigurationOptions();
             //options.EndPoints.Add("localhost");
             //options.Ssl = true;
@@ -37,6 +37,9 @@ namespace RedisWithStackExchange
             // Simple get of data types from the cache
             string key1 = cache.StringGet("key1");
             int key2 = (int)cache.StringGet("key2"); 
+
+            //Add Hash value
+            cache.HashSet("hashkey", "hashfield", "hashValue");
  
             var foo2 = JsonConvert.DeserializeObject<Foo>(cache.StringGet("serializedFoo"));
             bool areEqual = foo1 == foo2; 
